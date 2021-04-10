@@ -30,8 +30,21 @@ newShoppingItem.save((err,item)=>{
 
 });
 
-router.put('/test',(req,res,next)=>{
-
+router.put('/item/:id',(req,res,next)=>{
+   Item.findOneAndUpdate({_id:req.params.id},{
+      $set:{
+          itemName:req.body.itemName,
+          itemQuantity:req.body.itemQuantity,
+          itemBought:req.body.itemBought,
+      }
+   },
+   function(err,result){
+      if(err){
+         res.json(err);
+      }else{
+         res.json(result);
+      }
+   });
 });
 
 router.delete('/test',(req,res,next)=>{
