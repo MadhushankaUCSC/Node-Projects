@@ -47,7 +47,13 @@ router.put('/item/:id',(req,res,next)=>{
    });
 });
 
-router.delete('/test',(req,res,next)=>{
-
+router.delete('/item/:id',(req,res,next)=>{
+Item.remove({_id:req.params.id},function(err,result){
+   if(err){
+      res.json(err);
+   }else{
+      res.json(result);
+   }
+});
 });
 module.exports=router;
